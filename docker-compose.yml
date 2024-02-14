@@ -1,0 +1,25 @@
+version: '3'
+
+services: 
+        appache2_webserver:
+                container_name: demo-container
+                image: demo-image
+                build:
+                   context: .
+                ports:
+                   - 8080:80
+                volumes:
+                   - demo-volume:/app
+                networks: 
+                   - demo-net
+
+networks:
+        demo-net:
+volumes:
+        demo-volume:
+                driver: local
+                driver_opts:
+                        type: none
+                        device: home/chaitanya/projects/volume/demo-volume
+                        o: bind 
+                        
