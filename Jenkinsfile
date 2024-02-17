@@ -1,15 +1,6 @@
 pipeline {
     agent any 
     stages{
-        stage ("clonig-repo"){
-            steps{
-                sh '''
-                if !( ls -ld Energy_website );then 
-                    git clone https://github.com/Chaitanya305/Energy_website.git
-                fi
-                '''
-            }
-        }
         stage ("deployement"){
             steps{
                 script{
@@ -24,7 +15,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             emailext body: 'Build Completed Successfully.', subject: 'Build Completed Successfully.', to: 'chaitanyagolhar35@gmail.com'
