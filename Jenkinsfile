@@ -20,7 +20,7 @@ pipeline {
             mail bcc: '', body: 'Build Completed Successfully.', cc: '', from: '', replyTo: '', subject: 'Build Completed Successfully.', to: 'chaitanyagolhar35@gmail.com'
         }
         failure {
-            emailext body: 'Build is failed.', subject: 'Build failed please check the pipeline.', to: 'chaitanyagolhar0305@gmail.com'
+            mail bcc: '', body: 'Build failed.', cc: '', from: '', replyTo: '', subject: 'Build Failed.', to: 'chaitanyagolhar35@gmail.com'
         }
     }
 }
