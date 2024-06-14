@@ -14,9 +14,9 @@ steps:
 - script: docker build -f $(System.DefaultWorkingDirectory)/Dockerfile . -t $(Docker_registry)/$(Image_name):$(Build.BuildNumber)
   displayName: 'build docker image'
 
-- script: |
-    echo $Docker_pass        
-    echo $Docker_pass | docker login -u chaitanya305 --password-stdin
+- script: echo $Docker_pass
+  displayName: 'printing_docker_pass'
+- script: echo $Docker_pass | docker login -u chaitanya305 --password-stdin
   displayName: 'login to docker'
 
 - script: docker push $(Docker_registry)/$(Image_name):$(Build.BuildNumber) 
