@@ -11,7 +11,7 @@ pool: my-pool
 steps:
 - checkout: self
 
-- script: docker build $(System.DefaultWorkingDirectory)/Dockerfile -t $(Docker_registry)/$(Image_name):$(Build.BuildNumber)
+- script: docker build -f $(System.DefaultWorkingDirectory)/Dockerfile -t $(Docker_registry)/$(Image_name):$(Build.BuildNumber)
   displayName: 'build docker image'
 
 - script: $Docker_pass | docker login -u Chaitanya305 --password-stdin
