@@ -22,5 +22,5 @@ steps:
 - script: docker push $(Docker_registry)/$(Image_name):$(Build.BuildNumber) 
   displayName: docker push
 
-- script: docker run -p 80:80 -d --name energy-web $Docker_registry/$Image_name:$(Build.BuildNumber)
+- script: docker run -p 80:80 -d --name energy-web $(Docker_registry)/$(Image_name):$(Build.BuildNumber)
   displayName: 'Running Container'
