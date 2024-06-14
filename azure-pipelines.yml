@@ -14,8 +14,11 @@ steps:
 - script: docker build -f $(System.DefaultWorkingDirectory)/Dockerfile . -t $(Docker_registry)/$(Image_name):$(Build.BuildNumber)
   displayName: 'build docker image'
 
-- script: $Docker_pass | docker login -u Chaitanya305 --password-stdin
+- script: echo $Docker_pass | docker login -u Chaitanya305 --password-stdin
   displayName: 'login to docker'
 
 - script: docker push $(Docker_registry)/$(Image_name):$(Build.BuildNumber) 
   displayName: docker push
+
+- script: docker run -p 80:80 -d --name energy-web $Docker_registry/$Image_name:$(Build.BuildNumber)
+  displayName: 'Running Container'
