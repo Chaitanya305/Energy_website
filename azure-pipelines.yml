@@ -10,8 +10,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: docker build . -t energy-image
+- checkout: self
+
+- script: docker build $(System.DefaultWorkingDirectory)/Dockerfile -t $(Docker_registry)/$(Image_name):$(Build.BuildNumber)
   displayName: 'build docker image'
 
-- script: docker login
+- script: $Docker_pass | docker login -u Chaitanya305 --password-stdin
   displayName: 'login to docker'
+
+- script: docker push $(Docker_registry)/$(Image_name):$(Build.BuildNumber) 
+  displayName: docker push
