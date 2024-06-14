@@ -15,9 +15,9 @@ steps:
   displayName: 'build docker image'
 
   env:
-    Docker_pass: $(Docker_pass)
+    Docker_Password: $(Docker_pass)
 
-- script: echo $Docker_pass | docker login -u chaitanya305 --password-stdin
+- script: echo $Docker_Password | docker login -u chaitanya305 --password-stdin
   displayName: 'login to docker'
 
 - script: docker push $(Docker_registry)/$(Image_name):$(Build.BuildNumber) 
