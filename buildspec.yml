@@ -11,16 +11,21 @@ phases:
       - echo Installing Docker...
       - apt-get update
       - apt-get install -y docker.io
+      - echo login to dockerhub
+      - echo $docker_hub_pass | docker login -u chaitanya305 --password-stdin
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t enegrgy_image:latest .
-      - docker save -o enegrgy_image.tar enegrgy_image:latest
+      - docker tag enegrgy_image:latest chaitanya305/enegrgy_image:latest
+      #- docker save -o enegrgy_image.tar enegrgy_image:latest
   post_build:
     commands:
       - echo Build completed on `date`
-artifacts:
-  files:
-    - enegrgy_image.tar
-  discard-paths: yes
+      - echo pushing docker image
+      - docker push chaitanya305/enegrgy_image:latest
+#artifacts:
+#  files:
+#    - enegrgy_image.tar
+#  discard-paths: yes
