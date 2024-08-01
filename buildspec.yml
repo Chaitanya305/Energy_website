@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+    commands:
+      - echo starting build......
+  #pre_build:
+  #  commands:
+  #    - echo Logging in to Amazon ECR...
+  #    - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t enegrgy_image:latest .
+      - docker save -o enegrgy_image.tar enegrgy_image:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - enegrgy_image.tar
+  discard-paths: yes
